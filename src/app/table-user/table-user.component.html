@@ -3,8 +3,8 @@
       <div class="col-md-12">
           <div class="card">
               <div class="header">
-                  <h4 class="title">Striped Table</h4>
-                  <p class="category">Here is a subtitle for this table</p>
+                  <h4 class="title">Danh sach nhan vien</h4>
+                  <p class="category">Danh sach cac nhan vien trong cong ty</p>
               </div>
               <div class="content table-responsive table-full-width">
                   <table class="table table-striped">
@@ -14,8 +14,24 @@
                           </tr>
                       </thead>
                       <tbody>
-                          <tr *ngFor="let row of tableData1.dataRows">
-                              <td *ngFor="let cell of row">{{cell}}</td>
+                          <tr *ngFor="let user of users">
+                            <td><input type="checkbox"></td>
+                            <td>{{user.manv}}</td>
+                            <td>{{user.tennv}}</td>
+                            <td>{{user.diachi}}</td>
+                            <td>{{user.email}}</td>
+                            <td>{{user.username}}</td>
+                            <td>{{user.pass}}</td>
+                            <td><img [src]="user.link_avatar" alt="" width="120px"></td>
+                            <td>{{user.chucvu}}</td>
+                            <td><button  class="btn btn-fill btn-info">Edit</button>
+                                <button class="btn btn-fill btn-danger">Delete</button></td>
+                            
+                            
+                            
+                            
+                            
+                            
                           </tr>
                       </tbody>
                   </table>

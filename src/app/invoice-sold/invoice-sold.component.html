@@ -1,3 +1,50 @@
-<p>
-  invoice-sold works!
-</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="header">
+                    <h4 class="title">Danh sach nhan vien</h4>
+                    <p class="category">Danh sach cac nhan vien trong cong ty</p>
+                </div>
+                <div class="content table-responsive table-full-width">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th *ngFor="let cell of tableData1.headerRow">{{ cell }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let invoice of invoices">
+                              <td><input type="checkbox"></td>
+                              <td>{{invoice.mahd}}</td>
+                              <td>{{invoice.makh}}</td>
+                              <td>{{invoice.manv}}</td>
+                              <td>{{invoice.ngayban}}</td>
+                              <td>{{invoice.sotienban}}</td>
+                              
+                              
+                              
+                              <td>
+                                  <button class="btn btn-fill btn-warning">View</button>
+                                
+                                <button  class="btn btn-fill btn-info">Edit</button>
+                                  <button class="btn btn-fill btn-danger">Delete</button></td>
+                              
+                              
+                              
+                              
+                              
+                              
+                            </tr>
+                        </tbody>
+                    </table>
+  
+                </div>
+            </div>
+        </div>
+  
+  
+     
+    </div>
+  </div>
+  

@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <form action="" class="">
         <div class="form-inline">
-            <input class="form-control"  style="width: 50%!important;background-color: white" type="text">
+            <input class="form-control" style="width: 50%!important;background-color: white" type="text">
             <button class="btn btn-info btn-fill form-control ">
                 <i class="ti-search"></i>
                 Search</button>
@@ -9,16 +9,16 @@
 
     </form>
     <div style="margin: 25px 0">
-            <button class="btn btn-success btn-fill" style="margin-right: 25px">
-                    <span class="btn-label">
-                        <i class="ti-plus"></i>
-                    </span> Add New Book
-                </button>
-                <button class="btn btn-danger btn-fill">
-                    <span class="btn-label">
-                        <i class="ti-close"></i>
-                    </span> Delete Many Books
-                </button>
+        <button class="btn btn-success btn-fill" style="margin-right: 25px">
+            <span class="btn-label">
+                <i class="ti-plus"></i>
+            </span> Add New Book
+        </button>
+        <button class="btn btn-danger btn-fill">
+            <span class="btn-label">
+                <i class="ti-close"></i>
+            </span> Delete Many Books
+        </button>
     </div>
 
     <div class="row">
@@ -36,11 +36,27 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let row of tableData1.dataRows">
-                                <td><input type="checkbox"></td>
-                                <td *ngFor="let cell of row">{{cell}}</td>
-                                <td><button class="btn btn-fill btn-info">Edit</button>
-                                    <button class="btn btn-fill btn-warning">View</button></td>
+                            <tr *ngFor="let book of books">
+                                <td>
+                                    <input type="checkbox">
+                                </td>
+                                <td>{{book.masach}}</td>
+                                <td>
+                                    <img [attr.src]="book.link_anhbia" width="120px"/>
+                                </td>
+                                <td>{{book.tensach}}</td>
+                                <td>{{book.theloai}}</td>
+                            
+                                <td>{{book.soluong}}</td>
+                                <td>{{book.gianhap}}</td>
+                                <td>{{book.giaban}}</td>
+                                <td>{{book.tacgia}}</td>
+
+
+                                <td>
+                                    <button (click)="test()" class="btn btn-fill btn-info">Edit</button>
+                                    <button class="btn btn-fill btn-warning">View</button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -48,31 +64,31 @@
                 </div>
             </div>
         </div>
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        Launch demo modal
-      </button>
-      
-      <!-- Modal -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Launch demo modal
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
             </div>
-            <div class="modal-body">
-              ...
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-          </div>
         </div>
-      </div>
 
         <div class="col-md-12">
             <div class="card card-plain">

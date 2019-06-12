@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+
+import { UserService } from '../service/user.service';
 declare interface TableData {
   headerRow: string[];
   dataRows: string[][];
@@ -9,11 +12,23 @@ declare interface TableData {
   styleUrls: ['./table-user.component.css']
 })
 export class TableUserComponent implements OnInit {
+    public users = [];
+    constructor(private _userservice: UserService, private http: HttpClient){};
+
   public tableData1: TableData;
   public tableData2: TableData;
+  public delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+}
   ngOnInit(){
+    this._userservice.getallUsers().subscribe(data =>{
+        console.log(data);
+          this.users = data;
+       });
+       this.delay(300).then(any=>{
+           console.log(this.users);
       this.tableData1 = {
-          headerRow: [ 'ID', 'Name', 'Country', 'City', 'Salary'],
+          headerRow: ['','ID', 'Ten', 'Dia Chi', 'Email', 'Username','Password','Avatar','Chuc vu','Option'],
           dataRows: [
               ['1', 'Dakota Rice', 'Niger', 'Oud-Turnhout', '$36,738'],
               ['2', 'Minerva Hooper', 'Curaçao', 'Sinaai-Waas', '$23,789'],
@@ -34,6 +49,12 @@ export class TableUserComponent implements OnInit {
               ['6', 'Mason Porter', '$78,615', 'Chile', 'Gloucester' ]
           ]
       };
-  }
-
+    });
 }
+}
+    
+
+
+
+  
+

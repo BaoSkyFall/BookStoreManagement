@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
+import {HttpClientModule} from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routing';
 import { SidebarModule } from './sidebar/sidebar.module';
@@ -22,6 +22,8 @@ import { TableUserComponent } from './table-user/table-user.component';
 import { SettingsComponent } from './settings/settings.component';
 import { InvoiceBoughtComponent } from './invoice-bought/invoice-bought.component';
 import { InvoiceSoldComponent } from './invoice-sold/invoice-sold.component';
+import { LoginComponent } from './login/login.component';
+
 
 @NgModule({
   declarations: [
@@ -37,10 +39,12 @@ import { InvoiceSoldComponent } from './invoice-sold/invoice-sold.component';
     TableUserComponent,
     SettingsComponent,
     InvoiceBoughtComponent,
-    InvoiceSoldComponent
+    InvoiceSoldComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     RouterModule.forRoot(AppRoutes),
     SidebarModule,
     NavbarModule,

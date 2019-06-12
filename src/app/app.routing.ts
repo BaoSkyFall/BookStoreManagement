@@ -12,6 +12,7 @@ import { TableUserComponent } from './table-user/table-user.component';
 import { InvoiceBoughtComponent } from './invoice-bought/invoice-bought.component';
 import { InvoiceSoldComponent } from './invoice-sold/invoice-sold.component';
 import { SettingsComponent } from './settings/settings.component';
+import { LoginComponent } from './login/login.component';
 
 export const AppRoutes: Routes = [
     //Start
@@ -48,7 +49,10 @@ export const AppRoutes: Routes = [
         path: 'settings',
         component: SettingsComponent
     },
-    
+    {
+        path: 'login',
+        component: LoginComponent
+    },
     //End
     {
         path: 'typography',

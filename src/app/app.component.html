@@ -1,12 +1,18 @@
-<div class="wrapper">
-    <div class="sidebar" data-background-color="white" data-active-color="danger">
-        <sidebar-cmp></sidebar-cmp>
+<div  class="wrapper">
+    <div *ngIf="!isLogin()">
+            <div class="sidebar" data-background-color="white" data-active-color="danger">
+                    <sidebar-cmp></sidebar-cmp>
+                </div>
+                <div class="main-panel">
+                    <navbar-cmp ></navbar-cmp>
+                    <div class="content">
+                        <router-outlet (activate)="onRouterOutletActivate($event)"></router-outlet>
+                    </div>
+                    <footer-cmp></footer-cmp>
+                </div>
     </div>
-    <div class="main-panel">
-        <navbar-cmp></navbar-cmp>
-        <div class="content">
-            <router-outlet></router-outlet>
-        </div>
-        <footer-cmp></footer-cmp>
+    <div *ngIf="isLogin()" id="login_main">
+            <router-outlet (activate)="onRouterOutletActivate($event)"></router-outlet>
     </div>
+   
 </div>
