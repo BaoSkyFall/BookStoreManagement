@@ -9,6 +9,7 @@ import { FooterModule } from './shared/footer/footer.module';
 import { NavbarModule} from './shared/navbar/navbar.module';
 import { FixedPluginModule} from './shared/fixedplugin/fixedplugin.module';
 import { NguiMapModule} from '@ngui/map';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { DashboardComponent }   from './dashboard/dashboard.component';
 import { UserComponent }   from './user/user.component';
@@ -23,6 +24,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { InvoiceBoughtComponent } from './invoice-bought/invoice-bought.component';
 import { InvoiceSoldComponent } from './invoice-sold/invoice-sold.component';
 import { LoginComponent } from './login/login.component';
+import * as Material from "@angular/material";
 
 
 @NgModule({
@@ -44,11 +46,28 @@ import { LoginComponent } from './login/login.component';
   ],
   imports: [
     BrowserModule,
+    Material.MatToolbarModule,
+    Material.MatGridListModule,
+    Material.MatFormFieldModule,
+    Material.MatInputModule,
+    Material.MatRadioModule,
+    Material.MatSelectModule,
+    Material.MatCheckboxModule,
+    Material.MatDatepickerModule,
+    Material.MatNativeDateModule,
+    Material.MatButtonModule,
+    Material.MatSnackBarModule,
+    Material.MatTableModule,
+    Material.MatIconModule,
+    Material.MatPaginatorModule,
+    Material.MatSortModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     RouterModule.forRoot(AppRoutes),
     SidebarModule,
     NavbarModule,
     FooterModule,
+        
     FixedPluginModule,
     NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=YOUR_KEY_HERE'})
 
