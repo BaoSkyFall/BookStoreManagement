@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="header">
@@ -48,8 +48,20 @@
 
 
 
+  </div> -->
+  <div class="search-div">
+    <button class="btn btn-fill btn-success" mat-raised-button>
+      <mat-icon>add</mat-icon>Create
+    </button>
+    <mat-form-field class="search-form-field" floatLabel="never">
+      <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
+      <button class="btn btn-fill btn-info" mat-button matSuffix mat-icon-button aria-label="Clear"*ngIf="searchKey"  (click)="onSearchClear()">
+        <mat-icon  >close</mat-icon>
+      </button>
+
+    </mat-form-field>
   </div>
-  <table mat-table [dataSource]="listData" matSort>
+  <table mat-table [dataSource]="listData" class="table-material" matSort>
     <ng-container matColumnDef="mahd">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Ma Hoa Don</mat-header-cell>
       <mat-cell *matCellDef="let element">{{element.mahd}}</mat-cell>
@@ -71,14 +83,27 @@
       <mat-cell *matCellDef="let element">{{element.sotienban}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="actions">
-        <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
-        <mat-cell *matCellDef="let elemnent">
-          <button mat-icon-button><mat-icon>launch</mat-icon></button>
-          <button mat-icon-button color="warn"><mat-icon>delete_outline</mat-icon></button>
-        </mat-cell>
-      </ng-container>
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button class="btn btn-fill btn-info" mat-icon-button><mat-icon>visibility</mat-icon></button>
+        <button class="btn btn-fill btn-danger" mat-icon-button color="warn"><mat-icon>delete_outline</mat-icon></button>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="loading">
+      <mat-footer-cell *matFooterCellDef colspan="6">
+        Loading data...
+      </mat-footer-cell>
+    </ng-container>
+    <ng-container matColumnDef="noData">
+      <mat-footer-cell *matFooterCellDef colspan="6">
+        No data.
+      </mat-footer-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
+    <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}"></mat-footer-row>
   </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
 
 </div>

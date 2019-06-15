@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { InvoiceService } from '../service/invoice.service';
 import { HttpClient } from '@angular/common/http';
-import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
+import { MatTableDataSource, MatSort, MatPaginator,MatIcon } from '@angular/material';
 import { IInvoice_Sold } from '../invoice_sold';
 
+import { FormsModule } from '@angular/forms';
 
 declare interface TableData {
   headerRow: string[];
@@ -22,7 +23,7 @@ export class InvoiceSoldComponent implements OnInit {
   displayedColumns: string[] = ['mahd', 'makh', 'manv', 'ngayban', 'sotienban','actions'];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  searchKey: string;
+  searchKey: string = "";
 
   public tableData1: TableData;
   public delay(ms: number) {
@@ -33,14 +34,14 @@ export class InvoiceSoldComponent implements OnInit {
       console.log(data);
       this.invoices = data;
 
-      this.listData = new MatTableDataSource(this.invoices);
-      // this.listData.sort = this.sort;
-      //   this.listData.paginator = this.paginator;
-      //   this.listData.filterPredicate = (data, filter) => {
-      //     return this.displayedColumns.some(ele => {
-      //       return ele != 'actions' && data[ele].toLowerCase().indexOf(filter) != -1;
-      //     });
-      //   };
+      this.listData = new MatTableDataSource(data);
+      this.listData.sort = this.sort;
+        this.listData.paginator = this.paginator;
+        this.listData.filterPredicate = (data, filter) => {
+          return this.displayedColumns.some(ele => {
+            return ele != 'actions' && data[ele].toLowerCase().indexOf(filter) != -1;
+          });
+        };
     });
 
 
@@ -67,7 +68,9 @@ export class InvoiceSoldComponent implements OnInit {
   }
 
   applyFilter() {
+    console.log(this.searchKey);
     this.listData.filter = this.searchKey.trim().toLowerCase();
+
   }
 
 }

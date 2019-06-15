@@ -1,67 +1,73 @@
-<div class="container-fluid">
-  <div class="row">
-      <div class="col-md-12">
-          <div class="card">
-              <div class="header">
-                  <h4 class="title">Danh sach nhan vien</h4>
-                  <p class="category">Danh sach cac nhan vien trong cong ty</p>
-              </div>
-              <div class="content table-responsive table-full-width">
-                  <table class="table table-striped">
-                      <thead>
-                          <tr>
-                              <th *ngFor="let cell of tableData1.headerRow">{{ cell }}</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          <tr *ngFor="let user of users">
-                            <td><input type="checkbox"></td>
-                            <td>{{user.manv}}</td>
-                            <td>{{user.tennv}}</td>
-                            <td>{{user.diachi}}</td>
-                            <td>{{user.email}}</td>
-                            <td>{{user.username}}</td>
-                            <td>{{user.pass}}</td>
-                            <td><img [src]="user.link_avatar" alt="" width="120px"></td>
-                            <td>{{user.chucvu}}</td>
-                            <td><button  class="btn btn-fill btn-info">Edit</button>
-                                <button class="btn btn-fill btn-danger">Delete</button></td>
-                            
-                            
-                            
-                            
-                            
-                            
-                          </tr>
-                      </tbody>
-                  </table>
-
-              </div>
-          </div>
+<div class="search-div">
+        <button class="btn btn-fill btn-success" mat-raised-button (click)="onCreate()">
+          <mat-icon>add</mat-icon>Create
+        </button>
+        <mat-form-field class="search-form-field" floatLabel="never">
+          <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
+          <button class="btn btn-fill btn-info" mat-button matSuffix mat-icon-button aria-label="Clear"*ngIf="searchKey"  (click)="onSearchClear()">
+            <mat-icon  >close</mat-icon>
+          </button>
+    
+        </mat-form-field>
       </div>
-
-
-      <div class="col-md-12">
-          <div class="card card-plain">
-              <div class="header">
-                  <h4 class="title">Table on Plain Background</h4>
-                  <p class="category">Here is a subtitle for this table</p>
-              </div>
-              <div class="content table-responsive table-full-width">
-                  <table class="table table-hover">
-                      <thead>
-                          <tr>
-                              <th *ngFor="let cell of tableData2.headerRow">{{ cell }}</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          <tr *ngFor="let row of tableData2.dataRows">
-                              <td *ngFor="let cell of row">{{cell}}</td>
-                          </tr>
-                      </tbody>
-                  </table>
-              </div>
-          </div>
-      </div>
-  </div>
-</div>
+      <table mat-table [dataSource]="listData" class="table-material" matSort>
+        <ng-container matColumnDef="manv">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Ma Nhan Vien</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.manv}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="tennv">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Ten Nhan Vien</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.tennv}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="diachi">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Dia Chi</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.diachi}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="email">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.email}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="username">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Username</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.username}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="pass">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Password</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.pass}}</mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="link_avatar">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Avatar</mat-header-cell>
+                    <mat-cell *matCellDef="let element"><img src="{{element.link_avatar}}" width="100px" alt=""></mat-cell>
+                  </ng-container>   
+                    <ng-container matColumnDef="_role">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Role</mat-header-cell>
+                        <mat-cell *matCellDef="let element">{{element._role}}</mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="chucvu">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>Chuc vu</mat-header-cell>
+                            <mat-cell *matCellDef="let element">{{element.chucvu}}</mat-cell>
+                          </ng-container>
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <button class="btn btn-fill btn-info" mat-icon-button><mat-icon>visibility</mat-icon></button>
+            <button class="btn btn-fill btn-danger" mat-icon-button color="warn"><mat-icon>delete_outline</mat-icon></button>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="loading">
+          <mat-footer-cell *matFooterCellDef colspan="6">
+            Loading data...
+          </mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="noData">
+          <mat-footer-cell *matFooterCellDef colspan="6">
+            No data.
+          </mat-footer-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
+        <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}"></mat-footer-row>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+    

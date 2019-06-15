@@ -1,0 +1,81 @@
+<form [formGroup] = "service.form" (submit)= "onSubmit()" class="normal-form">
+  <mat-grid-list cols="2" rowHeight= "500px">
+
+    <mat-grid-tile>
+      <div class="controles-container">
+        <input type="hidden" formControlName="$key">
+        <mat-form-field>
+          <input type="text" formControlName="manv" matInput placeholder="Ma Nhan Vien">
+          <mat-error>This field is mandatory</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input type="text" formControlName="tennv" matInput placeholder="Ten Nhan Vien">
+          <mat-error>This field is mandatory</mat-error>
+    
+        </mat-form-field>
+        <mat-form-field>
+          <input type="text" formControlName="email" matInput placeholder="Email">
+          <mat-error>Invalid Email Address</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input type="text" formControlName="diachi" matInput placeholder="Dia Chi">
+            <mat-error>This field is mandatory</mat-error>
+      
+          </mat-form-field>
+        <mat-form-field>
+          <input type="text" formControlName="username" matInput placeholder="Username">
+          <mat-error>This field is mandatory</mat-error>
+      
+        </mat-form-field>
+        <mat-form-field>
+          <input type="text" formControlName="pass" matInput placeholder="Password">
+          <mat-error>This field is mandatory</mat-error>
+      
+        </mat-form-field>
+        <mat-form-field>
+          <input type="text" [(ngModel)]="link_avatar" formControlName="link_avatar" matInput placeholder="Link Avatar">
+          <mat-error>This field is mandatory</mat-error>
+      
+        </mat-form-field>
+          
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="controles-container">
+        <div>
+            <img src="{{link_avatar}}" width="200px" height="200px" alt="">
+          
+        </div>
+
+        <mat-form-field>
+ 
+          <mat-select  placeholder="Role"  formControlName="_role">
+            <mat-option *ngFor="let role of roles" [value]="role.value">
+              {{role.value}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="Your birthday ">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+ 
+            <mat-select  placeholder="Chuc Vu"  formControlName="chucvu">
+              <mat-option *ngFor="let chuc of chucvu" [value]="chuc.value">
+                {{chuc.value}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+      
+        <div class="button-row">
+          <button mat-raised-button color="primary" type="submit">Submit</button>
+          <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
+        </div>
+ 
+
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</form>

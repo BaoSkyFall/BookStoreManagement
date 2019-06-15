@@ -1,49 +1,56 @@
-<div class="container-fluid">
-  <div class="row">
-      <div class="col-md-12">
-          <div class="card">
-              <div class="header">
-                  <h4 class="title">Danh sach nhan vien</h4>
-                  <p class="category">Danh sach cac nhan vien trong cong ty</p>
-              </div>
-              <div class="content table-responsive table-full-width">
-                  <table class="table table-striped">
-                      <thead>
-                          <tr>
-                              <th *ngFor="let cell of tableData1.headerRow">{{ cell }}</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          <tr *ngFor="let invoice of invoices">
-                            <td><input type="checkbox"></td>
-                            <td>{{invoice.mahd}}</td>
-                            <td>{{invoice.macongty}}</td>
-                            <td>{{invoice.manv}}</td>
-                            <td>{{invoice.ngaymua}}</td>
-                            <td>{{invoice.sotienmua}}</td>
-                            
-                            
-                            
-                            <td>
-                                <button class="btn btn-fill btn-warning">View</button>
-                              
-                              <button  class="btn btn-fill btn-info">Edit</button>
-                                <button class="btn btn-fill btn-danger">Delete</button></td>
-                            
-                            
-                            
-                            
-                            
-                            
-                          </tr>
-                      </tbody>
-                  </table>
+<div class="search-div">
+    <button class="btn btn-fill btn-success" mat-raised-button>
+      <mat-icon>add</mat-icon>Create
+    </button>
+    <mat-form-field class="search-form-field" floatLabel="never">
+      <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
+      <button class="btn btn-fill btn-info" mat-button matSuffix mat-icon-button aria-label="Clear"*ngIf="searchKey"  (click)="onSearchClear()">
+        <mat-icon  >close</mat-icon>
+      </button>
 
-              </div>
-          </div>
-      </div>
-
-
-   
+    </mat-form-field>
   </div>
-</div>
+  <table mat-table [dataSource]="listData" class="table-material" matSort>
+    <ng-container matColumnDef="mahd">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Ma Hoa Don</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.mahd}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="macongty">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Ma Cong Ty</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.macongty}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="manv">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Ma Nhan Vien</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.manv}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="ngaymua">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Ngay Bmua</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.ngaymua}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="sotienmua">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>So Tien Ban</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.sotienmua}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button class="btn btn-fill btn-info" mat-icon-button><mat-icon>visibility</mat-icon></button>
+        <button class="btn btn-fill btn-danger" mat-icon-button color="warn"><mat-icon>delete_outline</mat-icon></button>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="loading">
+      <mat-footer-cell *matFooterCellDef colspan="6">
+        Loading data...
+      </mat-footer-cell>
+    </ng-container>
+    <ng-container matColumnDef="noData">
+      <mat-footer-cell *matFooterCellDef colspan="6">
+        No data.
+      </mat-footer-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
+    <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}"></mat-footer-row>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons></mat-paginator>

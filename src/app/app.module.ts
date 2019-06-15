@@ -10,6 +10,7 @@ import { NavbarModule} from './shared/navbar/navbar.module';
 import { FixedPluginModule} from './shared/fixedplugin/fixedplugin.module';
 import { NguiMapModule} from '@ngui/map';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule,FormsModule } from "@angular/forms";
 
 import { DashboardComponent }   from './dashboard/dashboard.component';
 import { UserComponent }   from './user/user.component';
@@ -25,6 +26,7 @@ import { InvoiceBoughtComponent } from './invoice-bought/invoice-bought.componen
 import { InvoiceSoldComponent } from './invoice-sold/invoice-sold.component';
 import { LoginComponent } from './login/login.component';
 import * as Material from "@angular/material";
+import { TableUserDialogComponent } from './table-user/table-user-dialog/table-user-dialog.component';
 
 
 @NgModule({
@@ -42,10 +44,13 @@ import * as Material from "@angular/material";
     SettingsComponent,
     InvoiceBoughtComponent,
     InvoiceSoldComponent,
-    LoginComponent
+    LoginComponent,
+    TableUserDialogComponent
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
+    FormsModule,
     Material.MatToolbarModule,
     Material.MatGridListModule,
     Material.MatFormFieldModule,
@@ -61,6 +66,7 @@ import * as Material from "@angular/material";
     Material.MatIconModule,
     Material.MatPaginatorModule,
     Material.MatSortModule,
+    Material.MatDialogModule,
     BrowserAnimationsModule,
     HttpClientModule,
     RouterModule.forRoot(AppRoutes),
@@ -73,6 +79,7 @@ import * as Material from "@angular/material";
 
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[TableUserDialogComponent],
 })
 export class AppModule { }
