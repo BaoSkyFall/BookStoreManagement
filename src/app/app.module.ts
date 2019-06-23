@@ -27,6 +27,7 @@ import { InvoiceSoldComponent } from './invoice-sold/invoice-sold.component';
 import { LoginComponent } from './login/login.component';
 import * as Material from "@angular/material";
 import { TableUserDialogComponent } from './table-user/table-user-dialog/table-user-dialog.component';
+import { InvoiceBouthgtBoughtDialogComponent } from './invoice-bought/invoice-bouthgt-bought-dialog/invoice-bouthgt-bought-dialog.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { TableUserDialogComponent } from './table-user/table-user-dialog/table-u
     InvoiceBoughtComponent,
     InvoiceSoldComponent,
     LoginComponent,
-    TableUserDialogComponent
+    TableUserDialogComponent,
+    InvoiceBouthgtBoughtDialogComponent
   ],
   imports: [
     BrowserModule,

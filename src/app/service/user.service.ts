@@ -8,9 +8,10 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
+  public isAdd:boolean = true;
   form: FormGroup = new FormGroup(
     {
-      $key: new FormControl(null),
+
       manv: new FormControl('',Validators.required),
       tennv: new FormControl('',Validators.required),
       diachi: new FormControl('',Validators.required),
@@ -52,5 +53,19 @@ export class UserService {
            
          })
     
+  }
+  UpdateUser(user: FormGroup)
+  {
+    console.log(user.value);
+    this.http.put("http://localhost:3000/api/themnhanvien",user.value).subscribe(res=>{
+      //here you received the response of your post
+      console.log(res);
+      //you can do asomething, like
+    })
+
+  }
+  populateForm(user)
+  {
+    this.form.setValue(user);
   }
 }

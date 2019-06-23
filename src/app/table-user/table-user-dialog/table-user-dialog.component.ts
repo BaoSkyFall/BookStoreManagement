@@ -1,34 +1,67 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,OnInit, Inject } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IUser } from '../../users';
 import { UserService } from '../../service/user.service';
+import { NoficationService } from '../../service/nofication.service';
+
+
+export interface DialogDataTemp {
+  isAdd: boolean;
+}
 @Component({
   selector: 'app-table-user-dialog',
   templateUrl: './table-user-dialog.component.html',
   styleUrls: ['./table-user-dialog.component.css']
 })
-export class TableUserDialogComponent implements OnInit {
 
-  link_avatar:string = "https://cdn1.thr.com/sites/default/files/imagecache/scale_crop_768_433/2019/03/avatar-publicity_still-h_2019.jpg";
-  roles = [
-  {id:1, value: "Admin"},
-  {id:2,value:"User"}
+export class TableUserDialogComponent {
+
+ 
+  public isAdd: boolean
+  
+
+  public link_avatar_ts: string = "";
+roles = [
+  { id: 1, value: "Admin" },
+  { id: 2, value: "Staff" }
 ];
 chucvu = [
-  {value: "Quan Ly"},
-  {value:"Nhan Vien"},
+  { value: "Quản Lý" },
+  { value: "Nhân Viên" },
 ]
-constructor(private service: UserService) { }
+constructor(private service: UserService, private nofication: NoficationService,
+  public dialogRef: MatDialogRef<any>,
+  @Inject(MAT_DIALOG_DATA) public data: DialogDataTemp) {
+      this.isAdd= data.isAdd
+  }
 
-ngOnInit() {
-}
-onClear()
-{
-  this.service.form.reset();
-}
-onSubmit()
-{
-  console.log(this.service.form.value);
-  this.service.AddnewUers(this.service.form);
-}
+  ngOnInit() {
 
+  }
+  onClear() {
+    this.service.form.reset();
+  }
+  onSubmit() {
+    if(this.isAdd)
+    {
+      console.log(this.service.form.value);
+      this.service.AddnewUers(this.service.form);
+      this.nofication.success(':: Submitted successfully');
+      this.onClose();
+    }
+    else
+    {
+      console.log(this.isAdd);
+      console.log(this.service.form.value);
+      this.service.UpdateUser(this.service.form);
+      this.nofication.success(':: Submitted successfully');
+      this.onClose();
+    }
+    
+
+  }
+  onClose() {
+    this.service.form.reset();
+    this.dialogRef.close();
+  }
 }
