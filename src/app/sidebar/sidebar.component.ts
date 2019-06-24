@@ -10,14 +10,11 @@ export interface RouteInfo {
 }
 
 export const ROUTES: RouteInfo[] = [
-    { path: 'dashboard', title: 'Dashboard',  icon: 'ti-panel', class: '' },
-    { path: 'user', title: 'User Profile',  icon:'ti-user', class: '' },
+
     { path: 'table-books', title: 'Table Books',  icon:'ti-view-list-alt', class: '' },
     { path: 'table-user', title: 'Table Users',  icon:'ti-layout-column3', class: '' },    
     { path: 'invoice-bought', title: 'Invoice Bought',  icon:'ti-clipboard', class: '' },
     { path: 'invoice-sold', title: 'Invoice Sold',  icon:'ti-notepad', class: '' },
-    { path: 'settings', title: 'Settings',  icon:'ti-settings', class: '' },
-   
     { path: 'login', title: 'Logout',  icon:'ti-arrow-left', class: 'active-pro' },
 ];
 

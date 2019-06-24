@@ -1,74 +1,80 @@
 <div class="search-div">
-        <button class="btn btn-fill btn-success" mat-raised-button>
-          <mat-icon>add</mat-icon>Create
-        </button>
-        <mat-form-field class="search-form-field" floatLabel="never">
-          <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
-          <button class="btn btn-fill btn-info" mat-button matSuffix mat-icon-button aria-label="Clear"*ngIf="searchKey"  (click)="onSearchClear()">
-            <mat-icon  >close</mat-icon>
-          </button>
-    
-        </mat-form-field>
-      </div>
-      <table mat-table [dataSource]="listData" class="table-material" matSort>
-        <ng-container matColumnDef="masach">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>Ma Sach</mat-header-cell>
-          <mat-cell *matCellDef="let element">{{element.masach}}</mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="tensach">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>Ten Sach</mat-header-cell>
-          <mat-cell *matCellDef="let element">{{element.tensach}}</mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="theloai">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>The Loai</mat-header-cell>
-          <mat-cell *matCellDef="let element">{{element.theloai}}</mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="ngaymua">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>Ngay Bmua</mat-header-cell>
-          <mat-cell *matCellDef="let element">{{element.ngaymua}}</mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="link_anhbia">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>Hinh Anh</mat-header-cell>
-          <mat-cell *matCellDef="let element"><img src="{{element.link_anhbia}}" width="100px" alt=""></mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="soluong">
-                <mat-header-cell *matHeaderCellDef mat-sort-header>So Luong</mat-header-cell>
-                <mat-cell *matCellDef="let element">{{element.soluong}}</mat-cell>
-              </ng-container>
-              <ng-container matColumnDef="gianhap">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Gia Nhap</mat-header-cell>
-                    <mat-cell *matCellDef="let element">{{element.gianhap}}</mat-cell>
-                  </ng-container>
-                  <ng-container matColumnDef="giaban">
-                        <mat-header-cell *matHeaderCellDef mat-sort-header>Gia Ban</mat-header-cell>
-                        <mat-cell *matCellDef="let element">{{element.giaban}}</mat-cell>
-                      </ng-container>
-                      <ng-container matColumnDef="tacgia">
-                            <mat-header-cell *matHeaderCellDef mat-sort-header>Tac Gia</mat-header-cell>
-                            <mat-cell *matCellDef="let element">{{element.tacgia}}</mat-cell>
-                          </ng-container>
-        <ng-container matColumnDef="actions">
-          <mat-header-cell *matHeaderCellDef></mat-header-cell>
-          <mat-cell *matCellDef="let row">
-            <button class="btn btn-fill btn-info" mat-icon-button><mat-icon>visibility</mat-icon></button>
-            <button class="btn btn-fill btn-danger" mat-icon-button color="warn"><mat-icon>delete_outline</mat-icon></button>
-          </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="loading">
-          <mat-footer-cell *matFooterCellDef colspan="6">
-            Loading data...
-          </mat-footer-cell>
-        </ng-container>
-        <ng-container matColumnDef="noData">
-          <mat-footer-cell *matFooterCellDef colspan="6">
-            No data.
-          </mat-footer-cell>
-        </ng-container>
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-        <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
-        <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}"></mat-footer-row>
-      </table>
-      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
-    
+  <button class="btn btn-fill btn-success" mat-raised-button (click)="onCreate()">
+    <mat-icon>add</mat-icon>Create
+  </button>
+  <!-- <mat-form-field class="search-form-field" floatLabel="never">
+    <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter($event.target.value)">
+    <button class="btn btn-fill btn-info" mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+      <mat-icon>close</mat-icon>
+    </button>
 
+  </mat-form-field> -->
+
+</div>
+
+ <table mat-table [dataSource]="listData" class="table-material" matSort>
+  <ng-container matColumnDef="masach">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Mã Sách</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.masach}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="tensach">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Tên Sách</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.tensach}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="theloai">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Thể Loại</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.theloai}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="ngaymua">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Ngày Mua</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.ngaymua}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="link_anhbia">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Hình Ảnh</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <img src="{{element.link_anhbia}}" width="100px" alt="">
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="soluong">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Số Lượng</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.soluong}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="gianhap">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Giá Nhập</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.gianhap}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="giaban">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Giá Bán</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.giaban}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="tacgia">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Tác Giả</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.tacgia}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <button class="btn btn-fill btn-info" (click)="onEdit(row)" mat-icon-button>
+        <mat-icon>visibility</mat-icon>
+      </button>
+      <button class="btn btn-fill btn-danger" (click)="onDelete(row)" mat-icon-button color="warn">
+        <mat-icon>delete_outline</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="loading">
+    <mat-footer-cell *matFooterCellDef colspan="6">
+      Loading data...
+    </mat-footer-cell>
+  </ng-container>
+  <ng-container matColumnDef="noData">
+    <mat-footer-cell *matFooterCellDef colspan="6">
+      No data.
+    </mat-footer-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
+  <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}"></mat-footer-row>
+</table> -->
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons></mat-paginator>

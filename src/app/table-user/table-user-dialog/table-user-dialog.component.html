@@ -1,3 +1,8 @@
+<mat-toolbar>
+  <span>{{isAdd?"New User":"Edit User"}}</span>
+  <span class="fill-remaining-space"></span>
+  <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+</mat-toolbar>
 <form [formGroup] = "service.form" (submit)= "onSubmit()" class="normal-form">
   <mat-grid-list cols="2" rowHeight= "500px">
 
@@ -32,7 +37,7 @@
       
         </mat-form-field>
         <mat-form-field>
-          <input type="text" formControlName="link_avatar" matInput placeholder="Link Avatar">
+          <input type="text" [(ngModel)]="link_avatar" formControlName="link_avatar" matInput placeholder="Link Avatar">
           <mat-error>This field is mandatory</mat-error>
       
         </mat-form-field>
@@ -42,7 +47,7 @@
     <mat-grid-tile>
       <div class="controles-container">
         <div>
-            <img src="" width="200px" height="200px" alt="">
+            <img src="{{link_avatar}}" width="200px" height="200px" alt="">
           
         </div>
 

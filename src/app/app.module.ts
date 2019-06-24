@@ -28,6 +28,11 @@ import { LoginComponent } from './login/login.component';
 import * as Material from "@angular/material";
 import { TableUserDialogComponent } from './table-user/table-user-dialog/table-user-dialog.component';
 import { InvoiceBouthgtBoughtDialogComponent } from './invoice-bought/invoice-bouthgt-bought-dialog/invoice-bouthgt-bought-dialog.component';
+import { TableDialogComponent } from './table/table-dialog/table-dialog.component';
+import { AuthGuardService } from './auth/auth-guard.service';
+import { AuthService } from './auth/auth.service';
+import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
+import { InvoiceSoldDialogComponent } from './invoice-sold/invoice-sold-dialog/invoice-sold-dialog.component';
 
 
 @NgModule({
@@ -47,7 +52,9 @@ import { InvoiceBouthgtBoughtDialogComponent } from './invoice-bought/invoice-bo
     InvoiceSoldComponent,
     LoginComponent,
     TableUserDialogComponent,
-    InvoiceBouthgtBoughtDialogComponent
+    InvoiceBouthgtBoughtDialogComponent,
+    TableDialogComponent,
+    InvoiceSoldDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -69,19 +76,24 @@ import { InvoiceBouthgtBoughtDialogComponent } from './invoice-bought/invoice-bo
     Material.MatPaginatorModule,
     Material.MatSortModule,
     Material.MatDialogModule,
+    Material.MatCardModule,
     BrowserAnimationsModule,
     HttpClientModule,
     RouterModule.forRoot(AppRoutes),
+
     SidebarModule,
     NavbarModule,
     FooterModule,
-        
     FixedPluginModule,
     NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=YOUR_KEY_HERE'})
 
   ],
-  providers: [],
+  providers: [
+    AuthGuardService,
+    AuthService,
+    JwtHelperService
+  ],
   bootstrap: [AppComponent],
-  entryComponents:[TableUserDialogComponent],
+  entryComponents:[TableUserDialogComponent,TableDialogComponent,InvoiceBouthgtBoughtDialogComponent,InvoiceSoldDialogComponent],
 })
 export class AppModule { }

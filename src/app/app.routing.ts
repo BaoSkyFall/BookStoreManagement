@@ -13,65 +13,56 @@ import { InvoiceBoughtComponent } from './invoice-bought/invoice-bought.componen
 import { InvoiceSoldComponent } from './invoice-sold/invoice-sold.component';
 import { SettingsComponent } from './settings/settings.component';
 import { LoginComponent } from './login/login.component';
-
+import { 
+    AuthGuardService as AuthGuard 
+  } from './auth/auth-guard.service';
+  
 export const AppRoutes: Routes = [
     //Start
-    {
-        path: '',
-        redirectTo: 'dashboard',
-        pathMatch: 'full',
-    },
-    {
-        path: 'dashboard',
-        component: DashboardComponent
-    },
-    {
-        path: 'user',
-        component: UserComponent
-    },
+    // {
+    //     path: 'user',
+    //     component: UserComponent
+    // },
+    // {
+    //     path: 'dashboard',
+    //     component: DashboardComponent,
+    //     canActivate: [AuthGuard] 
+    // },
+
     {
         path: 'table-books',
-        component: TableComponent
+        component: TableComponent,
+        canActivate: [AuthGuard] 
+        
     },
     {
         path: 'table-user',
-        component: TableUserComponent
+        component: TableUserComponent,
+        canActivate: [AuthGuard] 
+        
     },
     {
         path: 'invoice-bought',
-        component: InvoiceBoughtComponent
-    },
+        component: InvoiceBoughtComponent,
+        canActivate: [AuthGuard] 
+        
+        },
     {
         path: 'invoice-sold',
-        component: InvoiceSoldComponent
+        component: InvoiceSoldComponent,
+        canActivate: [AuthGuard] 
+        
     },
-    {
-        path: 'settings',
-        component: SettingsComponent
-    },
+
     {
         path: 'login',
         component: LoginComponent
     },
     //End
+   
     {
-        path: 'typography',
-        component: TypographyComponent
-    },
-    {
-        path: 'icons',
-        component: IconsComponent
-    },
-    {
-        path: 'maps',
-        component: MapsComponent
-    },
-    {
-        path: 'notifications',
-        component: NotificationsComponent
-    },
-    {
-        path: 'upgrade',
-        component: UpgradeComponent
+        path: '',
+        redirectTo: 'login',
+        pathMatch: 'full',
     }
 ]

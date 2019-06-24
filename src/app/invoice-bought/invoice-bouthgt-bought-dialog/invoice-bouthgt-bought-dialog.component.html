@@ -1,80 +1,83 @@
-<form [formGroup] = "service.form" (submit)= "onSubmit()" class="normal-form">
-  <mat-grid-list cols="2" rowHeight= "500px">
+<mat-toolbar>
+  <span>{{isAdd?"New Invoice":"Edit Invoice"}}</span>
+
+
+  <span class="fill-remaining-space"></span>
+  <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1">
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-toolbar>
+<form [formGroup]="service.bought_form" (submit)="onSubmit()" class="normal-form mt-5">
+  <mat-grid-list cols="1" rowHeight="700px">
 
     <mat-grid-tile>
       <div class="controles-container">
         <mat-form-field>
-          <input type="text" formControlName="manv" matInput placeholder="Ma Nhan Vien">
+          <input type="text" formControlName="mahd" matInput placeholder="Ma Hoa Don">
           <mat-error>This field is mandatory</mat-error>
         </mat-form-field>
-        <mat-form-field>
-          <input type="text" formControlName="tennv" matInput placeholder="Ten Nhan Vien">
-          <mat-error>This field is mandatory</mat-error>
-    
-        </mat-form-field>
-        <mat-form-field>
-          <input type="text" formControlName="email" matInput placeholder="Email">
-          <mat-error>Invalid Email Address</mat-error>
-        </mat-form-field>
-        <mat-form-field>
-            <input type="text" formControlName="diachi" matInput placeholder="Dia Chi">
-            <mat-error>This field is mandatory</mat-error>
-      
-          </mat-form-field>
-        <mat-form-field>
-          <input type="text" formControlName="username" matInput placeholder="Username">
-          <mat-error>This field is mandatory</mat-error>
-      
-        </mat-form-field>
-        <mat-form-field>
-          <input type="text" formControlName="pass" matInput placeholder="Password">
-          <mat-error>This field is mandatory</mat-error>
-      
-        </mat-form-field>
-        <mat-form-field>
-          <input type="text" formControlName="link_avatar" matInput placeholder="Link Avatar">
-          <mat-error>This field is mandatory</mat-error>
-      
-        </mat-form-field>
-          
-      </div>
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <div class="controles-container">
         <div>
-            <img src="" width="200px" height="200px" alt="">
-          
+          <div formArrayName="items" *ngFor="let item of service.bought_form.get('items').controls; let i = index;">
+            <div [formGroupName]="i">
+              <mat-form-field>
+                <input matInput formControlName="masach"  ng-disabled="!isAdd" placeholder="Ma Sach">
+
+              </mat-form-field>
+              <mat-form-field>
+                <input type="number" matInput formControlName="quanity" (keyup)="tinhTien()" placeholder="So Luong">
+
+              </mat-form-field>
+              <mat-form-field>
+                <input type="number" matInput formControlName="price" (keyup)="tinhTien()" placeholder="Gia">
+
+              </mat-form-field>
+
+            </div>
+
+          </div>
+          <button *ngIf=isAdd type="button" class="btn btn-fill btn-success" (click)="onAddButtonClick()" mat-raised-button>
+            <mat-icon>add</mat-icon>Add
+          </button>
         </div>
 
+
+
         <mat-form-field>
- 
-          <mat-select  placeholder="Role"  formControlName="_role">
-            <mat-option *ngFor="let role of roles" [value]="role.value">
-              {{role.value}}
+
+          <mat-select placeholder="Ten Cong Ty" formControlName="macongty">
+            <mat-option *ngFor="let cty of tencongty" [value]="cty.value">
+              {{cty.name}}
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <!-- <mat-form-field>
-          <input matInput [matDatepicker]="picker" placeholder="Your birthday ">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field> -->
+
         <mat-form-field>
- 
-            <mat-select  placeholder="Chuc Vu"  formControlName="chucvu">
-              <mat-option *ngFor="let chuc of chucvu" [value]="chuc.value">
-                {{chuc.value}}
-              </mat-option>
-            </mat-select>
+          <input type="text" formControlName="ngaymuaban" matInput placeholder="Ngay Mua">
+          <mat-error>This field is mandatory</mat-error>
+
+        </mat-form-field>
+
+        <div class="controles-container">
+          <mat-form-field>
+            <input type="number" formControlName="tongtien" value={{tongtien}} [(ngModel)]="tongtien" disabled matInput placeholder="Tong Tien">
+            <mat-error>This field is mandatory</mat-error>
+
           </mat-form-field>
-      
-        <div class="button-row">
-          <button mat-raised-button color="primary" type="submit">Submit</button>
-          <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
+          <!-- <mat-card >Tong Tien: {{tongtien}}</mat-card> -->
+
+          <div class="button-row">
+            <button mat-raised-button color="primary" type="submit">Submit</button>
+            <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
+          </div>
+
+
         </div>
- 
 
       </div>
+
+    </mat-grid-tile>
+    <mat-grid-tile>
+
     </mat-grid-tile>
   </mat-grid-list>
 </form>

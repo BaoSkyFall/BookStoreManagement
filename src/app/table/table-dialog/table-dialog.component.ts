@@ -1,42 +1,42 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IUser } from '../../users';
-import { UserService } from '../../service/user.service';
 import { NoficationService } from '../../service/nofication.service';
-
-
+import { BooksService } from '../../service/books.service';
 export interface DialogDataTemp {
   isAdd: boolean;
-  link_avatar:string;
+  link_anhbia:string;
+  link_anhsau:string;
+  link_trangdau:string;
 }
 @Component({
-  selector: 'app-table-user-dialog',
-  templateUrl: './table-user-dialog.component.html',
-  styleUrls: ['./table-user-dialog.component.css']
+  selector: 'app-table-dialog',
+  templateUrl: './table-dialog.component.html',
+  styleUrls: ['./table-dialog.component.css']
 })
-
-export class TableUserDialogComponent {
-
-
-  isAdd: boolean
-
-
-  public link_avatar: string = "";
-  roles = [
-    { id: 1, value: "Admin" },
-    { id: 2, value: "Staff" }
-  ];
-  chucvu = [
-    { value: "Quản Lý" },
-    { value: "Nhân Viên" },
-  ]
-  constructor(private service: UserService, private nofication: NoficationService,
+export class TableDialogComponent implements OnInit {
+   isAdd: boolean;
+   link_anhbia:string;
+   link_anhsau:string;
+   link_trangdau:string;
+  constructor(private service: BooksService, private nofication: NoficationService,
     public dialogRef: MatDialogRef<any>,
     @Inject(MAT_DIALOG_DATA) public data: DialogDataTemp) {
-    this.isAdd = data.isAdd
-    this.link_avatar= data.link_avatar
+    this.isAdd = data.isAdd;
+    this.link_anhbia = data.link_anhbia;
+    this.link_anhsau = data.link_anhsau;
+    this.link_trangdau = data.link_trangdau;
   }
+  theloai = [
+    { id: 1, value: "Sách Khoa Học & Kỹ Thuật" },
+    { id: 2, value: "Sách Kiến Thức Tổng Hợp" },
+    { id: 3, value: "Sách Văn Học" },
+    { id:4, value: "Sách Kỹ Năng Sống" },
+    { id: 5, value: "Truyện Tranh Manga, Comic" },
 
+    
+
+  ];
   ngOnInit() {
 
   }
@@ -45,10 +45,10 @@ export class TableUserDialogComponent {
   }
   onSubmit() {
     if (this.isAdd) {
-      this.service.AddnewUers(this.service.form).subscribe(res => {
+      this.service.addNewBook(this.service.form).subscribe(res => {
         //here you received the response of your post
         console.log(res);
-        if(res== "Add successfull")
+        if(res== "Add Successfull")
         {
           this.nofication.success(':: Submitted successfully');
           this.onClose();
@@ -69,16 +69,17 @@ export class TableUserDialogComponent {
     else {
       console.log(this.isAdd);
       console.log(this.service.form.value);
-      this.service.UpdateUser(this.service.form).subscribe(res=>{
+      this.service.updateBook(this.service.form).subscribe(res=>{
         //here you received the response of your post
-        if(res== "Update successfull")
+        if(res== "Update Successfull")
         {
-          this.nofication.success(':: Update successfully');
+          this.nofication.success(':: Update Successfully');
           this.onClose();
         }
         //you can do asomething, like
         else
         {
+          console.log(res);
           this.nofication.warn(':: Error! Check your input is valid')
  
         }
@@ -96,6 +97,7 @@ export class TableUserDialogComponent {
   onClose() {
     this.service.form.reset();
     this.dialogRef.close(true);
-
+    
   }
+
 }

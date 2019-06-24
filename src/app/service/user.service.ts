@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-  public isAdd:boolean = true;
+  isAdd:boolean = true;
   form: FormGroup = new FormGroup(
     {
 
@@ -45,26 +45,24 @@ export class UserService {
   }
   AddnewUers(user: FormGroup)
   {
-    console.log(user.value);
-    this.http.post("http://localhost:3000/api/themnhanvien",user.value).subscribe(res=>{
-               //here you received the response of your post
-               console.log(res);
-               //you can do asomething, like
-           
-         })
+    // console.log(user.value);
+    return this.http.post("http://localhost:3000/api/themnhanvien",user.value,{responseType:'text'})
     
   }
   UpdateUser(user: FormGroup)
   {
-    console.log(user.value);
-    this.http.put("http://localhost:3000/api/themnhanvien",user.value).subscribe(res=>{
-      //here you received the response of your post
-      console.log(res);
-      //you can do asomething, like
-    })
+    // console.log(user.value);
+    return this.http.put("http://localhost:3000/api/themnhanvien",user.value,{responseType:'text'})
 
   }
-  populateForm(user)
+  DeleteUser(user:any)
+  {
+    console.log(user.manv);
+    let url = "http://localhost:3000/api/xoanhanvien/" + user.manv;
+    console.log(url);
+    return this.http.delete(url,{responseType:'text'});
+  }
+  populateForm(user: FormGroup)
   {
     this.form.setValue(user);
   }

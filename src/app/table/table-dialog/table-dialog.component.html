@@ -1,0 +1,91 @@
+<mat-toolbar>
+  <span>{{isAdd?"New Book":"Edit Book"}}</span>
+  <span class="fill-remaining-space"></span>
+  <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1">
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-toolbar>
+<form [formGroup]="service.form" (submit)="onSubmit()" class="normal-form">
+  <mat-grid-list cols="2" rowHeight="500px">
+
+    <mat-grid-tile>
+      <div class="controles-container">
+        <mat-form-field>
+          <input type="text" formControlName="masach" matInput placeholder="Mã Sách">
+          <mat-error>This field is mandatory</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input type="text" formControlName="tensach" matInput placeholder="Tên Sách">
+          <mat-error>This field is mandatory</mat-error>
+
+        </mat-form-field>
+        <mat-form-field>
+ 
+          <mat-select  placeholder="Thể Loại"  formControlName="theloai">
+            <mat-option *ngFor="let role of theloai" [value]="role.value">
+              {{role.value}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <input type="text" formControlName="link_anhbia" matInput placeholder="Link Ảnh Bìa">
+          <mat-error>This field is mandatory</mat-error>
+
+        </mat-form-field>
+        <mat-form-field>
+          <input type="text" formControlName="link_anhsau" matInput placeholder="Link Ảnh Sau">
+          <mat-error>This field is mandatory</mat-error>
+
+        </mat-form-field>
+        <mat-form-field>
+          <input type="text" formControlName="link_trangdau" matInput placeholder="Link Trang Đầu">
+          <mat-error>This field is mandatory</mat-error>
+
+        </mat-form-field>
+        <mat-form-field>
+          <input type="number" formControlName="soluong" matInput placeholder="Số Lượng">
+          <mat-error>This field is mandatory</mat-error>
+
+        </mat-form-field>
+
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="controles-container">
+        <div>
+          <img src="{{link_anhbia}}" width=33% height="200px" alt="">
+          <img src="{{link_anhsau}}" width=33% height="200px" alt="">
+          <img src="{{link_trangdau}}" width=33% height="200px" alt="">
+
+        </div>
+
+        <mat-form-field>
+          <input type="number" formControlName="gianhap" matInput placeholder="Giá Nhập">
+          <mat-error>This field is mandatory</mat-error>
+
+        </mat-form-field>
+        <!-- <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="Your birthday ">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field> -->
+        <mat-form-field>
+          <input type="number" formControlName="giaban" matInput placeholder="Giá Bán">
+          <mat-error>This field is mandatory</mat-error>
+
+        </mat-form-field>
+        <mat-form-field>
+          <input type="text" formControlName="tacgia" matInput placeholder="Tác Giả">
+          <mat-error>This field is mandatory</mat-error>
+
+        </mat-form-field>
+        <div class="button-row">
+          <button mat-raised-button color="primary" type="submit">Submit</button>
+          <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
+        </div>
+
+
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</form>

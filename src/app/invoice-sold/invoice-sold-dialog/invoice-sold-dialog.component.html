@@ -1,0 +1,83 @@
+<mat-toolbar>
+    <span>{{isAdd?"New Invoice":"Edit Invoice"}}</span>
+  
+  
+    <span class="fill-remaining-space"></span>
+    <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </mat-toolbar>
+  <form [formGroup]="service.sold_form" (submit)="onSubmit()" class="normal-form mt-5">
+    <mat-grid-list cols="1" rowHeight="700px">
+  
+      <mat-grid-tile>
+        <div class="controles-container">
+          <mat-form-field>
+            <input type="text" formControlName="mahd" matInput placeholder="Ma Hoa Don">
+            <mat-error>This field is mandatory</mat-error>
+          </mat-form-field>
+          <div>
+            <div formArrayName="items" *ngFor="let item of service.sold_form.get('items').controls; let i = index;">
+              <div [formGroupName]="i">
+                <mat-form-field>
+                  <input matInput formControlName="masach"  ng-disabled="!isAdd" placeholder="Ma Sach">
+  
+                </mat-form-field>
+                <mat-form-field>
+                  <input type="number" matInput formControlName="quanity" (keyup)="tinhTien()" placeholder="So Luong">
+  
+                </mat-form-field>
+                <mat-form-field>
+                  <input type="number" matInput formControlName="price" (keyup)="tinhTien()" placeholder="Gia">
+  
+                </mat-form-field>
+  
+              </div>
+  
+            </div>
+            <button *ngIf=isAdd type="button" class="btn btn-fill btn-success" (click)="onAddButtonClick()" mat-raised-button>
+              <mat-icon>add</mat-icon>Add
+            </button>
+          </div>
+  
+  
+  
+          <mat-form-field>
+  
+            <mat-select placeholder="Ten Khach Hang" formControlName="makh">
+              <mat-option *ngFor="let cty of tenkhachhang" [value]="cty.value">
+                {{cty.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+  
+          <mat-form-field>
+            <input type="text" formControlName="ngaymuaban" matInput placeholder="Ngay Mua">
+            <mat-error>This field is mandatory</mat-error>
+  
+          </mat-form-field>
+  
+          <div class="controles-container">
+            <mat-form-field>
+              <input type="number" formControlName="tongtien" value={{tongtien}} [(ngModel)]="tongtien" disabled matInput placeholder="Tong Tien">
+              <mat-error>This field is mandatory</mat-error>
+  
+            </mat-form-field>
+            <!-- <mat-card >Tong Tien: {{tongtien}}</mat-card> -->
+  
+            <div class="button-row">
+              <button mat-raised-button color="primary" type="submit">Submit</button>
+              <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
+            </div>
+  
+  
+          </div>
+  
+        </div>
+  
+      </mat-grid-tile>
+      <mat-grid-tile>
+  
+      </mat-grid-tile>
+    </mat-grid-list>
+  </form>

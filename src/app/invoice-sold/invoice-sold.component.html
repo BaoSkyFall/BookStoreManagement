@@ -50,16 +50,16 @@
 
   </div> -->
   <div class="search-div">
-    <button class="btn btn-fill btn-success" mat-raised-button>
+    <button class="btn btn-fill btn-success" (click)="onCreate()" mat-raised-button>
       <mat-icon>add</mat-icon>Create
     </button>
-    <mat-form-field class="search-form-field" floatLabel="never">
+    <!-- <mat-form-field class="search-form-field" floatLabel="never">
       <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
-      <button class="btn btn-fill btn-info" mat-button matSuffix mat-icon-button aria-label="Clear"*ngIf="searchKey"  (click)="onSearchClear()">
-        <mat-icon  >close</mat-icon>
+      <button class="btn btn-fill btn-info" mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+        <mat-icon>close</mat-icon>
       </button>
 
-    </mat-form-field>
+    </mat-form-field> -->
   </div>
   <table mat-table [dataSource]="listData" class="table-material" matSort>
     <ng-container matColumnDef="mahd">
@@ -85,8 +85,12 @@
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let row">
-        <button class="btn btn-fill btn-info" mat-icon-button><mat-icon>visibility</mat-icon></button>
-        <button class="btn btn-fill btn-danger" mat-icon-button color="warn"><mat-icon>delete_outline</mat-icon></button>
+        <button class="btn btn-fill btn-info" (click)="onEdit(row.mahd,row.makh,row.sotienban)" mat-icon-button>
+          <mat-icon>visibility</mat-icon>
+        </button>
+        <button class="btn btn-fill btn-danger" (click)="onDelete(row.mahd)" mat-icon-button color="warn">
+          <mat-icon>delete_outline</mat-icon>
+        </button>
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="loading">
